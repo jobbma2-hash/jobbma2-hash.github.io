@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYXCOPY - Kundvagn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#6b46c1',
+                        },
+                        secondary: {
+                            500: '#9f7aea',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+
+    <main>
+        <!-- Cart Section -->
+        <section class="py-12">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-3xl font-bold mb-8">Din kundvagn</h1>
+                    
+                    <!-- Cart Items -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+                        <div class="flex items-start border-b border-gray-200 pb-6 mb-6">
+                            <div class="w-24 h-24 rounded-lg overflow-hidden mr-6">
+                                <img src="http://static.photos/technology/200x200/1" alt="Produkt" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold">𝟓𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫</h3>
+                                        <p class="text-gray-600">Premium kvalité</p>
+                                    </div>
+                                    <span class="text-lg font-bold text-primary-500">499 kr</span>
+                                </div>
+                                <div class="flex items-center mt-4">
+                                    <button class="text-gray-500 hover:text-primary-500">
+                                        <i data-feather="trash-2" class="w-5 h-5"></i>
+                                    </button>
+                                    <div class="flex items-center border border-gray-300 rounded-lg ml-4">
+                                        <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
+                                        <span class="px-3">1</span>
+                                        <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-bold mb-6">Orderöversikt</h2>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between">
+                                <span>Delsumma</span>
+                                <span>499 kr</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Frakt</span>
+                                <span>49 kr</span>
+                            </div>
+                            <div class="flex justify-between border-t border-gray-200 pt-4 font-bold text-lg">
+                                <span>Totalt</span>
+                                <span>548 kr</span>
+                            </div>
+                        </div>
+                        <a href="checkout.html" class="w-full bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 block text-center">
+                            Fortsätt till kassan
+                        </a>
+                        <a href="product.html" class="w-full mt-4 bg-white hover:bg-gray-100 text-gray-800 font-bold py-3 px-6 border border-gray-300 rounded-lg transition-all duration-300 block text-center">
+                            Fortsätt handla
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

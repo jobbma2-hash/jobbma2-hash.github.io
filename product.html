@@ -1,38 +1,164 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <title>Produkter</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYXCOPY - Produkter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#6b46c1',
+                        },
+                        secondary: {
+                            500: '#9f7aea',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-  <header>
-    <h1>Välj din 500-lapp</h1>
-    <button id="menu-btn">☰</button>
-    <nav>
-      <a href="index.html">Hem</a>
-      <a href="product.html">Produkter</a>
-    </nav>
-  </header>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
 
-  <main>
-    <div class="products">
-      <div class="product-card">
-        <img src="assets/images/option1-1.jpg" alt="Option 1">
-        <h2>Option 1</h2>
-        <p>Pris: 100 USD</p>
-        <button class="buy-btn" data-name="Option 1" data-price="100">Köp</button>
-      </div>
+    <main>
+        <!-- Product Showcase -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl font-bold text-center mb-16">Våra Premium Produkter</h1>
+                
+                <!-- 500-lappar -->
+                <div class="mb-20">
+                    <h2 class="text-3xl font-bold mb-10 text-center">500-lappar</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Product 1 -->
+                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                            <div class="product-slideshow relative h-64 overflow-hidden">
+                                <img src="http://static.photos/technology/640x360/1" alt="500-lappar Option 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">𝟓𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫</h3>
+                                <p class="text-gray-600 mb-4">Premium kvalité med holografiska säkerhetselement och unik serienummer.</p>
+<div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-primary-500">499 kr</span>
+                                    <button class="add-to-cart bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300" data-product="500-lappar Option 1" data-price="499">
+                                        Köp nu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-      <div class="product-card">
-        <img src="assets/images/option2-1.jpg" alt="Option 2">
-        <h2>Option 2</h2>
-        <p>Pris: 150 USD</p>
-        <button class="buy-btn" data-name="Option 2" data-price="150">Köp</button>
-      </div>
-    </div>
-  </main>
+                        <!-- Product 2 -->
+                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                            <div class="product-slideshow relative h-64 overflow-hidden">
+                                <img src="http://static.photos/technology/640x360/2" alt="500-lappar Option 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">𝟓𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫 Pro</h3>
+                                <p class="text-gray-600 mb-4">Limited edition med guldstämplar och certifikat av äkthet.</p>
+<div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-primary-500">599 kr</span>
+                                    <button class="add-to-cart bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300" data-product="500-lappar Option 2" data-price="599">
+                                        Köp nu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-  <script src="assets/js/script.js"></script>
+                <!-- 200-lappar -->
+                <div>
+                    <h2 class="text-3xl font-bold mb-10 text-center">200-lappar</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Product 1 -->
+                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                            <div class="product-slideshow relative h-64 overflow-hidden">
+                                <img src="http://static.photos/technology/640x360/3" alt="200-lappar Option 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">𝟐𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫</h3>
+                                <p class="text-gray-600 mb-4">Professionellt tryck med UV-skydd och vattenstämplar.</p>
+<div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-primary-500">299 kr</span>
+                                    <button class="add-to-cart bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300" data-product="200-lappar Option 1" data-price="299">
+                                        Köp nu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                            <div class="product-slideshow relative h-64 overflow-hidden">
+                                <img src="http://static.photos/technology/640x360/4" alt="200-lappar Option 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">𝟐𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫 Elite</h3>
+                                <p class="text-gray-600 mb-4">Exklusiv serie med individuell numrering och äkthetsgaranti.</p>
+<div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-primary-500">399 kr</span>
+                                    <button class="add-to-cart bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300" data-product="200-lappar Option 2" data-price="399">
+                                        Köp nu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quality Indicators -->
+        <section class="py-16 bg-gradient-to-r from-purple-50 to-indigo-50">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center p-6 rounded-xl bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-feather="award" class="text-primary-500 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Sjuk bra kvalitet</h3>
+                        <p class="text-sm text-gray-600">Varje produkt genomgår strikta kvalitetskontroller.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-feather="truck" class="text-primary-500 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Snabb leverans</h3>
+                        <p class="text-sm text-gray-600">Expressleverans inom 1-2 arbetsdagar.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-feather="shield" class="text-primary-500 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Premium service</h3>
+                        <p class="text-sm text-gray-600">Personlig service från våra experter.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-feather="headphones" class="text-primary-500 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Kundsupport 24/7</h3>
+                        <p class="text-sm text-gray-600">Alltid tillgänglig support när du behöver oss.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
 </body>
 </html>

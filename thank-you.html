@@ -1,13 +1,73 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <title>Tack!</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYXCOPY - Tack för din beställning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#6b46c1',
+                        },
+                        secondary: {
+                            500: '#9f7aea',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-  <h1>Tack!</h1>
-  <p>Din betalning har mottagits. Vi kontaktar dig snart.</p>
-  <a href="product.html">Tillbaka till produkter</a>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+
+    <main>
+        <!-- Thank You Section -->
+        <section class="py-20 min-h-screen flex items-center justify-center">
+            <div class="container mx-auto px-6">
+                <div class="max-w-2xl mx-auto text-center bg-white rounded-xl shadow-sm p-10 md:p-16 transition-all duration-500 transform hover:scale-[1.01] hover:shadow-md">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-feather="check" class="text-green-500 w-10 h-10"></i>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold mb-6">Tack för din beställning!</h1>
+                    <p class="text-lg text-gray-600 mb-8">Din beställning har mottagits och behandlas nu. En orderbekräftelse har skickats till din e-postadress.</p>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 text-left">
+                        <h3 class="text-lg font-bold mb-3">Orderinformation</h3>
+                        <div class="space-y-2">
+                            <p><span class="font-medium">Ordernummer:</span> #LYX123456</p>
+                            <p><span class="font-medium">Produkt:</span> 500-lappar Option 1</p>
+                            <p><span class="font-medium">Totalt:</span> 548 kr</p>
+                            <p><span class="font-medium">Beräknad leverans:</span> 2-3 arbetsdagar</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="product.html" class="bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 inline-block text-center">
+                            Se fler produkter
+                        </a>
+                        <a href="/" class="bg-white hover:bg-gray-100 text-gray-800 font-bold py-3 px-6 border border-gray-300 rounded-lg transition-all duration-300 inline-block text-center">
+                            Till startsidan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
 </body>
 </html>

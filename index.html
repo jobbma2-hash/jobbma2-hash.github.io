@@ -1,0 +1,40 @@
+// Exempelprodukt
+const product = {
+  name: "500-lapp",
+  price: 100,         
+  currency: "USD"     
+};
+
+// Din CoinSub API-nyckel
+const API_KEY = "DIN_COIN_SUB_API_KEY";  // byt ut mot din egen
+
+async function createPayment() {
+  try {
+    const response = await fetch("https://api.coinsub.com/v1/payments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`
+      },
+      body: JSON.stringify({
+        amount: product.price,
+        currency: product.currency,
+        name: product.name,
+        callback_url: "https://jobbma2-hash.github.io/thank-you.html"
+      })
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    const paymentDiv = document.getElementById("payment-info");
+    paymentDiv.innerHTML = `
+      <p>Betala med CoinSub:</p>
+      <a href="${data.payment_url}" target="_blank">Gå till betalning</a>
+    `;
+  } catch (err) {
+    console.error("Fel vid betalning:", err);
+  }
+}
+
+createPayment();

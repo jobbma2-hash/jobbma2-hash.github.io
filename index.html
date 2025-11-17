@@ -1,24 +1,202 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <title>Startsida</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYXCOPY - Premium 3D Designs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#6b46c1',
+                        },
+                        secondary: {
+                            500: '#9f7aea',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-  <header>
-    <h1>Välkommen till Bree</h1>
-    <button id="menu-btn">☰</button>
-    <nav>
-      <a href="index.html">Hem</a>
-      <a href="product.html">Produkter</a>
-    </nav>
-  </header>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
 
-  <main>
-    <p>Din gamla startsida med text, bilder och hero-sektion.</p>
-  </main>
+    <main class="overflow-hidden">
+        <!-- Hero Section -->
+        <section class="relative h-screen overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+            <div class="absolute inset-0 z-0">
+                <img src="http://static.photos/technology/1920x1080/1" alt="3D Design" class="w-full h-full object-cover opacity-40">
+            </div>
+            
+            <div class="relative z-10 h-full flex items-center">
+                <div class="container mx-auto px-6 text-center">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                            <span class="block">Premium</span>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500">3D Designs</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                            Upptäck våra exklusiva 3D-tjänster för moderna företag
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="product.html" class="bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:scale-105">
+                                Se våra produkter
+                            </a>
+                            <a href="#services" class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:bg-white/10">
+                                Våra tjänster
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Våra Tjänster</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="bg-gray-50 rounded-xl p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-lg flex items-center justify-center mb-6">
+                            <i data-feather="box" class="text-primary-500 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">3D Produktdesign</h3>
+                        <p class="text-gray-600 mb-4">Skapa realistiska 3D-modeller av dina produkter för marknadsföring och produktion.</p>
+                        <a href="#" class="text-primary-500 font-medium hover:text-primary-600 flex items-center">
+                            Läs mer
+                            <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="bg-gray-50 rounded-xl p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-16 h-16 bg-secondary-500/10 rounded-lg flex items-center justify-center mb-6">
+                            <i data-feather="film" class="text-secondary-500 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">3D Animationer</h3>
+                        <p class="text-gray-600 mb-4">Levande produktdemonstrationer och visuella berättelser i hög kvalitet.</p>
+                        <a href="#" class="text-primary-500 font-medium hover:text-primary-600 flex items-center">
+                            Läs mer
+                            <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="bg-gray-50 rounded-xl p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-16 h-16 bg-purple-500/10 rounded-lg flex items-center justify-center mb-6">
+                            <i data-feather="home" class="text-purple-500 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Arkitekturvisualisering</h3>
+                        <p class="text-gray-600 mb-4">Fotorealistiska renderings av byggnader och inredningar.</p>
+                        <a href="#" class="text-primary-500 font-medium hover:text-primary-600 flex items-center">
+                            Läs mer
+                            <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <script src="assets/js/script.js"></script>
+        <!-- Testimonials -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Vad våra kunder säger</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
+                                <img src="http://static.photos/people/200x200/1" alt="Customer" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Anna Karlsson</h4>
+                                <p class="text-gray-500">CEO, Designbyrån</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"LYXCOPY förvandlade våra produktkoncept till fantastiska 3D-visualiseringar som helt förändrat vår marknadsföring."</p>
+                        <div class="flex mt-4">
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
+                                <img src="http://static.photos/people/200x200/2" alt="Customer" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Marcus Andersson</h4>
+                                <p class="text-gray-500">CTO, TechVision</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Vi har använt LYXCOPY för flera projekt och resultaten har alltid överträffat våra förväntningar. Snabb respons och hög kvalitet!"</p>
+                        <div class="flex mt-4">
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gradient-to-r from-primary-500 to-secondary-500">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Redo att förvandla dina idéer till verklighet?</h2>
+                <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto">Kontakta oss idag för en kostnadsfri konsultation om ditt projekt.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="bg-white text-primary-500 hover:bg-gray-100 font-bold py-4 px-8 rounded-full transition-all duration-300 hover:scale-105">
+                        Kontakta oss
+                    </a>
+                    <a href="tel:+46123456789" class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-bold py-4 px-8 rounded-full transition-all duration-300">
+                        Ring oss
+                    </a>
+                </div>
+            </div>
+        </section>
+</main>
+    <custom-footer></custom-footer>
+    
+    <script src="components/cart-icon.js"></script>
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
 </body>
 </html>

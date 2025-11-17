@@ -1,7 +1,14 @@
-// CoinSub API
-const API_KEY = "DIN_COIN_SUB_API_KEY"; // byt mot din egen
+// Mobilmeny toggle
+const menuBtn = document.getElementById('menu-btn');
+const navMenu = document.querySelector('header nav');
 
-// Hantera köp-knappar
+if (menuBtn) {
+  menuBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+  });
+}
+
+// Hantera köp-knappar på produkt-sidan
 document.querySelectorAll('.buy-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const product = {
@@ -9,46 +16,21 @@ document.querySelectorAll('.buy-btn').forEach(btn => {
       price: btn.dataset.price,
       currency: "USD"
     };
-
-    // Spara produkt i localStorage för checkout-sidan
     localStorage.setItem('product', JSON.stringify(product));
-
-    // Gå till checkout
     window.location.href = "checkout.html";
   });
 });
 
-// Checkout-sida
+// Coinbase checkout
 if (window.location.href.includes("checkout.html")) {
   const product = JSON.parse(localStorage.getItem('product'));
+  const paymentDiv = document.getElementById("payment-info");
 
-  async function createPayment() {
-    try {
-      const response = await fetch("https://api.coinsub.com/v1/payments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${API_KEY}`
-        },
-        body: JSON.stringify({
-          amount: product.price,
-          currency: product.currency,
-          name: product.name,
-          callback_url: "https://jobbma2-hash.github.io/thank-you.html"
-        })
-      });
-
-      const data = await response.json();
-
-      const paymentDiv = document.getElementById("payment-info");
-      paymentDiv.innerHTML = `
-        <p>Betala med CoinSub:</p>
-        <a href="${data.payment_url}" target="_blank">Gå till betalning</a>
-      `;
-    } catch (err) {
-      console.error("Fel vid betalning:", err);
-    }
-  }
-
-  createPayment();
+  // Lägg till Coinbase Commerce-knapp
+  const checkoutButton = document.createElement('coinbase-commerce-checkout');
+  checkoutButton.setAttribute('checkout-id', 'DIN_CHECKOUT_ID'); // byt mot ditt Coinbase Commerce checkout-ID
+  checkoutButton.style.display = 'block';
+  checkoutButton.style.marginTop = '1rem';
+  paymentDiv.innerHTML = `<p>Betala med Coinbase:</p>`;
+  paymentDiv.appendChild(checkoutButton);
 }

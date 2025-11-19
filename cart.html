@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varukorg - Lyxcopy</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">Lyxcopy</div>
+            <nav class="nav">
+                <a href="index.html">Hem</a>
+                <a href="products.html">Produkter</a>
+                <a href="about.html">Om Oss</a>
+                <a href="contact.html">Kontakt</a>
+                <a href="cart.html" class="cart-link">🛒 Varukorg</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="cart-page">
+        <div class="container">
+            <h1>Din Varukorg</h1>
+            <div id="cartItems">
+                <!-- Varukorgsprodukter visas här -->
+            </div>
+            <div class="cart-summary">
+                <p>Totalt: <span id="cartTotal">0 kr</span></p>
+                <a href="checkout.html" class="cta-button">Till Kassa</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Lyxcopy. Alla rättigheter reserverade.</p>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

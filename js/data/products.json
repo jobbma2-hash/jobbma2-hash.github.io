@@ -1,0 +1,90 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "200-lappar",
+      "description": "Perfekt för småföretag och personligt bruk",
+      "basePrice": 419,
+      "category": "training-money",
+      "icon": "💳",
+      "bundles": [
+        {
+          "value": "2400 kr i sedlar",
+          "price": 419,
+          "savings": "82%",
+          "popular": false
+        },
+        {
+          "value": "4800 kr i sedlar", 
+          "price": 699,
+          "savings": "85%",
+          "popular": false
+        },
+        {
+          "value": "9600 kr i sedlar",
+          "price": 1049,
+          "savings": "89%",
+          "popular": true
+        },
+        {
+          "value": "16000 kr i sedlar",
+          "price": 1539,
+          "savings": "90%",
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "500-lappar",
+      "description": "Mest populära valet för företag", 
+      "basePrice": 279,
+      "category": "training-money",
+      "icon": "💼",
+      "bundles": [
+        {
+          "value": "3000 kr i sedlar",
+          "price": 279,
+          "savings": "91%",
+          "popular": false
+        },
+        {
+          "value": "6000 kr i sedlar",
+          "price": 489, 
+          "savings": "92%",
+          "popular": false
+        },
+        {
+          "value": "12000 kr i sedlar",
+          "price": 769,
+          "savings": "94%",
+          "popular": true
+        },
+        {
+          "value": "24000 kr i sedlar",
+          "price": 1259,
+          "savings": "95%",
+          "popular": false
+        },
+        {
+          "value": "40000 kr i sedlar", 
+          "price": 1749,
+          "savings": "96%",
+          "popular": false
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "training-money",
+      "name": "Träningssedlar",
+      "description": "Realistiska träningssedlar för olika behov"
+    },
+    {
+      "id": "crypto-vouchers", 
+      "name": "Crypto Vouchers",
+      "description": "Digitala vouchers för kryptovalutor"
+    }
+  ]
+}

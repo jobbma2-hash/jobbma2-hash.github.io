@@ -1,128 +1,1254 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sv">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LYXCOPY - Produkter</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="components/navbar.js"></script>
-    <script src="components/footer.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            500: '#6b46c1',
-                        },
-                        secondary: {
-                            500: '#9f7aea',
-                        }
-                    }
-                }
-            }
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyxcopy - Produkter</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a12;
+      color: #ffffff;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(34, 197, 94, 0.6); }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Header */
+    .header {
+      background: rgba(15, 15, 25, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid #22c55e;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .back-link {
+      background: rgba(34, 197, 94, 0.1);
+      border: 2px solid #22c55e;
+      color: #22c55e;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-link:hover {
+      background: rgba(34, 197, 94, 0.2);
+      transform: translateX(-5px);
+    }
+
+    /* Product Page Hero */
+    .product-hero {
+      background: linear-gradient(135deg, #0f0f19 0%, #1a1a2e 100%);
+      padding: 60px 20px 40px;
+      text-align: center;
+    }
+
+    .product-hero-title {
+      font-size: 48px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0 0 16px 0;
+      animation: shimmer 4s linear infinite;
+      background-size: 200% auto;
+    }
+
+    .product-hero-subtitle {
+      font-size: 18px;
+      color: #9ca3af;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Products Container */
+    .products-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 50px;
+    }
+
+    .product-section {
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(15, 15, 25, 0.9) 100%);
+      border-radius: 32px;
+      padding: 50px;
+      border: 3px solid rgba(34, 197, 94, 0.3);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+      transition: all 0.4s ease;
+      animation: slideInUp 0.6s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .product-section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(34, 197, 94, 0.4);
+      border-color: #22c55e;
+    }
+
+    .product-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid rgba(34, 197, 94, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-icon {
+      font-size: 90px;
+      margin-bottom: 24px;
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 8px 24px rgba(34, 197, 94, 0.5));
+    }
+
+    .product-name {
+      font-size: 42px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0 0 12px 0;
+      letter-spacing: 2px;
+    }
+
+    .product-description {
+      font-size: 17px;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+
+    /* Bundle Options */
+    .bundle-options {
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bundle-label {
+      font-size: 20px;
+      font-weight: 800;
+      color: #22c55e;
+      margin-bottom: 20px;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .bundle-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .bundle-option {
+      background: rgba(22, 33, 62, 0.6);
+      border: 2px solid rgba(34, 197, 94, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .bundle-option:hover {
+      border-color: #22c55e;
+      background: rgba(26, 26, 46, 0.8);
+      transform: translateX(8px);
+    }
+
+    .bundle-option.selected {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.15);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+    }
+
+    .bundle-option input[type="radio"] {
+      width: 24px;
+      height: 24px;
+      accent-color: #22c55e;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .bundle-info {
+      flex: 1;
+    }
+
+    .bundle-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .bundle-price-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .bundle-price {
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .bundle-savings {
+      background: rgba(34, 197, 94, 0.2);
+      border: 2px solid #22c55e;
+      color: #22c55e;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Quantity Selector */
+    .quantity-section {
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quantity-label {
+      font-size: 20px;
+      font-weight: 800;
+      color: #22c55e;
+      margin-bottom: 20px;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .quantity-selector {
+      background: rgba(22, 33, 62, 0.6);
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .qty-btn {
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 28px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    }
+
+    .qty-btn:hover {
+      transform: scale(1.15);
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+    }
+
+    .qty-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .qty-display {
+      font-size: 36px;
+      font-weight: 900;
+      color: #22c55e;
+      min-width: 80px;
+      text-align: center;
+      background: rgba(34, 197, 94, 0.1);
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 2px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .quantity-info {
+      text-align: right;
+    }
+
+    .quantity-total-label {
+      font-size: 15px;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .quantity-total-price {
+      font-size: 38px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Buttons */
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      padding: 20px 40px;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      color: white;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(34, 197, 94, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+      border: 2px solid #22c55e;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(34, 197, 94, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-loading {
+      pointer-events: none;
+    }
+
+    .btn-loading .btn-text {
+      opacity: 0;
+    }
+
+    .loading-spinner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    .btn-loading .loading-spinner {
+      display: block;
+    }
+
+    .error-message {
+      background: rgba(239, 68, 68, 0.15);
+      border: 2px solid #ef4444;
+      color: #ef4444;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 16px;
+      display: none;
+      animation: slideInUp 0.3s ease;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      color: white;
+      padding: 20px 32px;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      font-weight: 700;
+      z-index: 3000;
+      transform: translateY(200px);
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      font-size: 17px;
+      border: 2px solid #34d399;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+    }
+
+    /* Info Section */
+    .info-section {
+      background: #0f0f19;
+      padding: 80px 20px;
+      border-top: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .info-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .info-card {
+      text-align: center;
+      padding: 40px 28px;
+      background: rgba(22, 22, 36, 0.6);
+      border-radius: 20px;
+      border: 2px solid rgba(34, 197, 94, 0.2);
+      transition: all 0.4s ease;
+    }
+
+    .info-card:hover {
+      border-color: #22c55e;
+      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(34, 197, 94, 0.3);
+    }
+
+    .info-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 15px rgba(34, 197, 94, 0.4));
+    }
+
+    .info-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #22c55e;
+      margin: 0 0 12px 0;
+    }
+
+    .info-text {
+      font-size: 15px;
+      color: #9ca3af;
+      line-height: 1.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .products-container {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+      }
+
+      .product-section {
+        padding: 32px 24px;
+      }
+
+      .product-hero-title {
+        font-size: 32px;
+      }
+
+      .product-name {
+        font-size: 32px;
+      }
+
+      .product-icon {
+        font-size: 64px;
+      }
+
+      .quantity-selector {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .quantity-info {
+        text-align: center;
+      }
+
+      .bundle-price {
+        font-size: 26px;
+      }
+
+      .quantity-total-price {
+        font-size: 32px;
+      }
+
+      .toast {
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        font-size: 15px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Header -->
+  <header class="header">
+   <div class="header-container">
+    <div class="logo">
+     Lyxcopy
+    </div><a href="#home" class="back-link" id="backToHome"> <span>←</span> <span>Tillbaka till Startsidan</span> </a>
+   </div>
+  </header><!-- Product Hero -->
+  <section class="product-hero">
+   <h1 class="product-hero-title">Våra Premium Produkter</h1>
+   <p class="product-hero-subtitle">Välj ditt paket, välj antal, och betala säkert via Eneba</p>
+  </section><!-- Products Container -->
+  <main class="products-container"><!-- Product 1: 200-lappar -->
+   <section class="product-section">
+    <div class="product-header">
+     <div class="product-icon">
+      💳
+     </div>
+     <h2 class="product-name" id="product1Name">200-lappar</h2>
+     <p class="product-description" id="product1Description">Perfekt för småföretag och personligt bruk</p>
+    </div>
+    <div class="bundle-options"><label class="bundle-label">Välj Paket:</label>
+     <div class="bundle-grid"><label class="bundle-option"> <input type="radio" name="product1-bundle" value="2400-419" data-price="419">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         2 400 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          419 kr
+         </div><span class="bundle-savings">Spara 82%</span>
+        </div>
+       </div></label> <label class="bundle-option"> <input type="radio" name="product1-bundle" value="4800-699" data-price="699">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         4 800 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          699 kr
+         </div><span class="bundle-savings">Spara 85%</span>
+        </div>
+       </div></label> <label class="bundle-option"> <input type="radio" name="product1-bundle" value="9600-1049" data-price="1049">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         9 600 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          1 049 kr
+         </div><span class="bundle-savings">Spara 89%</span>
+        </div>
+       </div></label> <label class="bundle-option"> <input type="radio" name="product1-bundle" value="16000-1539" data-price="1539">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         16 000 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          1 539 kr
+         </div><span class="bundle-savings">Spara 90%</span>
+        </div>
+       </div></label>
+     </div>
+    </div>
+    <div class="quantity-section"><label class="quantity-label">Antal Paket:</label>
+     <div class="quantity-selector">
+      <div class="quantity-controls"><button class="qty-btn" id="product1Decrease">−</button>
+       <div class="qty-display" id="product1Quantity">
+        1
+       </div><button class="qty-btn" id="product1Increase">+</button>
+      </div>
+      <div class="quantity-info">
+       <div class="quantity-total-label">
+        Totalt Pris:
+       </div>
+       <div class="quantity-total-price" id="product1Total">
+        0 kr
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="action-buttons"><button class="btn btn-primary" id="buyProduct1"> <span class="btn-text" id="buyNow1">💳 Köp Nu via Eneba</span>
+      <div class="loading-spinner"></div></button> <button class="btn btn-secondary" id="addProduct1"> <span class="btn-text" id="addToCart1">🛒 Lägg i Varukorg</span>
+      <div class="loading-spinner"></div></button>
+    </div>
+    <div class="error-message" id="product1Error">
+     ⚠️ Vänligen välj ett paket
+    </div>
+   </section><!-- Product 2: 500-lappar -->
+   <section class="product-section">
+    <div class="product-header">
+     <div class="product-icon">
+      💼
+     </div>
+     <h2 class="product-name" id="product2Name">500-lappar</h2>
+     <p class="product-description" id="product2Description">Mest populära valet för företag</p>
+    </div>
+    <div class="bundle-options"><label class="bundle-label">Välj Paket:</label>
+     <div class="bundle-grid"><label class="bundle-option"> <input type="radio" name="product2-bundle" value="3000-279" data-price="279">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         3 000 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          279 kr
+         </div><span class="bundle-savings">Spara 91%</span>
+        </div>
+       </div></label> <label class="bundle-option"> <input type="radio" name="product2-bundle" value="6000-489" data-price="489">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         6 000 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          489 kr
+         </div><span class="bundle-savings">Spara 92%</span>
+        </div>
+       </div></label> <label class="bundle-option"> <input type="radio" name="product2-bundle" value="12000-769" data-price="769">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         12 000 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          769 kr
+         </div><span class="bundle-savings">Spara 94%</span>
+        </div>
+       </div></label> <label class="bundle-option"> <input type="radio" name="product2-bundle" value="24000-1259" data-price="1259">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         24 000 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          1 259 kr
+         </div><span class="bundle-savings">Spara 95%</span>
+        </div>
+       </div></label> <label class="bundle-option"> <input type="radio" name="product2-bundle" value="40000-1749" data-price="1749">
+       <div class="bundle-info">
+        <div class="bundle-value">
+         40 000 kr i sedlar
+        </div>
+        <div class="bundle-price-container">
+         <div class="bundle-price">
+          1 749 kr
+         </div><span class="bundle-savings">Spara 96%</span>
+        </div>
+       </div></label>
+     </div>
+    </div>
+    <div class="quantity-section"><label class="quantity-label">Antal Paket:</label>
+     <div class="quantity-selector">
+      <div class="quantity-controls"><button class="qty-btn" id="product2Decrease">−</button>
+       <div class="qty-display" id="product2Quantity">
+        1
+       </div><button class="qty-btn" id="product2Increase">+</button>
+      </div>
+      <div class="quantity-info">
+       <div class="quantity-total-label">
+        Totalt Pris:
+       </div>
+       <div class="quantity-total-price" id="product2Total">
+        0 kr
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="action-buttons"><button class="btn btn-primary" id="buyProduct2"> <span class="btn-text" id="buyNow2">💳 Köp Nu via Eneba</span>
+      <div class="loading-spinner"></div></button> <button class="btn btn-secondary" id="addProduct2"> <span class="btn-text" id="addToCart2">🛒 Lägg i Varukorg</span>
+      <div class="loading-spinner"></div></button>
+    </div>
+    <div class="error-message" id="product2Error">
+     ⚠️ Vänligen välj ett paket
+    </div>
+   </section>
+  </main><!-- Info Section -->
+  <section class="info-section">
+   <div class="info-container">
+    <div class="info-card">
+     <div class="info-icon">
+      🔒
+     </div>
+     <h3 class="info-title">Säker Betalning</h3>
+     <p class="info-text">Betalning via Eneba Crypto Voucher för maximal säkerhet</p>
+    </div>
+    <div class="info-card">
+     <div class="info-icon">
+      ⚡
+     </div>
+     <h3 class="info-title">Direkt Leverans</h3>
+     <p class="info-text">Få din beställning inom 24-48 timmar efter bekräftad betalning</p>
+    </div>
+    <div class="info-card">
+     <div class="info-icon">
+      💎
+     </div>
+     <h3 class="info-title">Premium Kvalitet</h3>
+     <p class="info-text">Högsta kvalitet garanterad på alla våra produkter</p>
+    </div>
+    <div class="info-card">
+     <div class="info-icon">
+      💬
+     </div>
+     <h3 class="info-title">24/7 Support</h3>
+     <p class="info-text">Vi finns här för dig när du behöver hjälp</p>
+    </div>
+   </div>
+  </section><!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+  <script>
+    const defaultConfig = {
+      product_1_name: "200-lappar",
+      product_1_description: "Perfekt för småföretag och personligt bruk",
+      product_2_name: "500-lappar",
+      product_2_description: "Mest populära valet för företag",
+      add_to_cart_text: "Lägg i Varukorg",
+      buy_now_text: "Köp Nu via Eneba",
+      back_to_home_text: "← Tillbaka till Startsidan",
+      background_color: "#0a0a12",
+      surface_color: "#1a1a2e",
+      text_color: "#ffffff",
+      accent_color: "#22c55e",
+      secondary_text_color: "#9ca3af",
+      font_family: "Segoe UI",
+      font_size: 16
+    };
+
+    let orderData = [];
+    let isDataSdkReady = false;
+
+    // Product State
+    const product1State = {
+      quantity: 1,
+      selectedPrice: 0
+    };
+
+    const product2State = {
+      quantity: 1,
+      selectedPrice: 0
+    };
+
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        orderData = data;
+      }
+    };
+
+    async function initDataSdk() {
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (result.isOk) {
+          isDataSdkReady = true;
         }
-    </script>
-</head>
-<body class="bg-gray-50">
-    <custom-navbar></custom-navbar>
+      }
+    }
 
-    <main>
-        <!-- Product Showcase -->
-        <section class="py-20">
-            <div class="container mx-auto px-6">
-                <h1 class="text-4xl font-bold text-center mb-16">Våra Premium Produkter</h1>
-                
-                <!-- 500-lappar -->
-                <div class="mb-20">
-                    <h2 class="text-3xl font-bold mb-10 text-center">500-lappar</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Product 1 -->
-                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                            <div class="product-slideshow relative h-64 overflow-hidden">
-                                <img src="http://static.photos/technology/640x360/1" alt="500-lappar Option 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">𝟓𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫</h3>
-                                <p class="text-gray-600 mb-4">Premium kvalité med holografiska säkerhetselement och unik serienummer.</p>
-<div class="flex justify-between items-center">
-                                    <span class="text-xl font-bold text-primary-500">499 kr</span>
-                                    <button class="add-to-cart bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300" data-product="500-lappar Option 1" data-price="499">
-                                        Köp nu
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+    // Bundle Selection
+    document.querySelectorAll('.bundle-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const radio = this.querySelector('input[type="radio"]');
+        const productGroup = radio.name;
+        
+        document.querySelectorAll(`input[name="${productGroup}"]`).forEach(r => {
+          r.parentElement.classList.remove('selected');
+        });
+        
+        this.classList.add('selected');
+        radio.checked = true;
 
-                        <!-- Product 2 -->
-                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                            <div class="product-slideshow relative h-64 overflow-hidden">
-                                <img src="http://static.photos/technology/640x360/2" alt="500-lappar Option 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">𝟓𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫 Pro</h3>
-                                <p class="text-gray-600 mb-4">Limited edition med guldstämplar och certifikat av äkthet.</p>
-<div class="flex justify-between items-center">
-                                    <span class="text-xl font-bold text-primary-500">599 kr</span>
-                                    <button class="add-to-cart bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300" data-product="500-lappar Option 2" data-price="599">
-                                        Köp nu
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        if (productGroup === 'product1-bundle') {
+          product1State.selectedPrice = parseInt(radio.dataset.price);
+          updateProduct1Total();
+        } else {
+          product2State.selectedPrice = parseInt(radio.dataset.price);
+          updateProduct2Total();
+        }
+      });
+    });
 
-                <!-- 200-lappar -->
-                <div>
-                    <h2 class="text-3xl font-bold mb-10 text-center">200-lappar</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Product 1 -->
-                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                            <div class="product-slideshow relative h-64 overflow-hidden">
-                                <img src="http://static.photos/technology/640x360/3" alt="200-lappar Option 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">𝟐𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫</h3>
-                                <p class="text-gray-600 mb-4">Professionellt tryck med UV-skydd och vattenstämplar.</p>
-<div class="flex justify-between items-center">
-                                    <span class="text-xl font-bold text-primary-500">299 kr</span>
-                                    <button class="add-to-cart bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300" data-product="200-lappar Option 1" data-price="299">
-                                        Köp nu
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+    // Product 1 Quantity Controls
+    document.getElementById('product1Decrease').addEventListener('click', () => {
+      if (product1State.quantity > 1) {
+        product1State.quantity--;
+        updateProduct1Display();
+      }
+    });
 
-                        <!-- Product 2 -->
-                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                            <div class="product-slideshow relative h-64 overflow-hidden">
-                                <img src="http://static.photos/technology/640x360/4" alt="200-lappar Option 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">𝟐𝟎𝟎-𝐥𝐚𝐩𝐩𝐚𝐫 Elite</h3>
-                                <p class="text-gray-600 mb-4">Exklusiv serie med individuell numrering och äkthetsgaranti.</p>
-<div class="flex justify-between items-center">
-                                    <span class="text-xl font-bold text-primary-500">399 kr</span>
-                                    <button class="add-to-cart bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300" data-product="200-lappar Option 2" data-price="399">
-                                        Köp nu
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-</main>
+    document.getElementById('product1Increase').addEventListener('click', () => {
+      if (product1State.quantity < 99) {
+        product1State.quantity++;
+        updateProduct1Display();
+      }
+    });
 
-    <custom-footer></custom-footer>
+    function updateProduct1Display() {
+      document.getElementById('product1Quantity').textContent = product1State.quantity;
+      document.getElementById('product1Decrease').disabled = product1State.quantity <= 1;
+      document.getElementById('product1Increase').disabled = product1State.quantity >= 99;
+      updateProduct1Total();
+    }
 
-    <script src="script.js"></script>
-    <script>
-        feather.replace();
-    </script>
-</body>
+    function updateProduct1Total() {
+      const total = product1State.selectedPrice * product1State.quantity;
+      document.getElementById('product1Total').textContent = total > 0 ? `${total} kr` : '0 kr';
+    }
+
+    // Product 2 Quantity Controls
+    document.getElementById('product2Decrease').addEventListener('click', () => {
+      if (product2State.quantity > 1) {
+        product2State.quantity--;
+        updateProduct2Display();
+      }
+    });
+
+    document.getElementById('product2Increase').addEventListener('click', () => {
+      if (product2State.quantity < 99) {
+        product2State.quantity++;
+        updateProduct2Display();
+      }
+    });
+
+    function updateProduct2Display() {
+      document.getElementById('product2Quantity').textContent = product2State.quantity;
+      document.getElementById('product2Decrease').disabled = product2State.quantity <= 1;
+      document.getElementById('product2Increase').disabled = product2State.quantity >= 99;
+      updateProduct2Total();
+    }
+
+    function updateProduct2Total() {
+      const total = product2State.selectedPrice * product2State.quantity;
+      document.getElementById('product2Total').textContent = total > 0 ? `${total} kr` : '0 kr';
+    }
+
+    // Buy Now - Product 1
+    document.getElementById('buyProduct1').addEventListener('click', async () => {
+      const selectedBundle = document.querySelector('input[name="product1-bundle"]:checked');
+      const errorElement = document.getElementById('product1Error');
+      const btn = document.getElementById('buyProduct1');
+
+      if (!selectedBundle) {
+        errorElement.style.display = 'block';
+        setTimeout(() => {
+          errorElement.style.display = 'none';
+        }, 3000);
+        return;
+      }
+
+      errorElement.style.display = 'none';
+      btn.classList.add('btn-loading');
+      btn.disabled = true;
+
+      const totalPrice = product1State.selectedPrice * product1State.quantity;
+      
+      // Calculate Eneba voucher needed
+      const voucherAmount = Math.ceil(totalPrice / 15) * 15;
+      const enebaUrl = `https://www.eneba.com/crypto-voucher-crypto-voucher-${voucherAmount}-eur-key-europe`;
+
+      showToast(`💳 Öppnar Eneba för ${voucherAmount} EUR betalning...`);
+
+      setTimeout(() => {
+        window.open(enebaUrl, '_blank', 'noopener,noreferrer');
+        btn.classList.remove('btn-loading');
+        btn.disabled = false;
+        showToast('✅ Följ instruktionerna på Eneba för att slutföra köpet!');
+      }, 1500);
+    });
+
+    // Buy Now - Product 2
+    document.getElementById('buyProduct2').addEventListener('click', async () => {
+      const selectedBundle = document.querySelector('input[name="product2-bundle"]:checked');
+      const errorElement = document.getElementById('product2Error');
+      const btn = document.getElementById('buyProduct2');
+
+      if (!selectedBundle) {
+        errorElement.style.display = 'block';
+        setTimeout(() => {
+          errorElement.style.display = 'none';
+        }, 3000);
+        return;
+      }
+
+      errorElement.style.display = 'none';
+      btn.classList.add('btn-loading');
+      btn.disabled = true;
+
+      const totalPrice = product2State.selectedPrice * product2State.quantity;
+      
+      const voucherAmount = Math.ceil(totalPrice / 15) * 15;
+      const enebaUrl = `https://www.eneba.com/crypto-voucher-crypto-voucher-${voucherAmount}-eur-key-europe`;
+
+      showToast(`💳 Öppnar Eneba för ${voucherAmount} EUR betalning...`);
+
+      setTimeout(() => {
+        window.open(enebaUrl, '_blank', 'noopener,noreferrer');
+        btn.classList.remove('btn-loading');
+        btn.disabled = false;
+        showToast('✅ Följ instruktionerna på Eneba för att slutföra köpet!');
+      }, 1500);
+    });
+
+    // Add to Cart - Product 1
+    document.getElementById('addProduct1').addEventListener('click', async () => {
+      if (!isDataSdkReady) {
+        showToast('⏳ Väntar på system...');
+        return;
+      }
+
+      if (orderData.length >= 999) {
+        showToast('⚠️ Varukorg full! Max 999 produkter.');
+        return;
+      }
+
+      const selectedBundle = document.querySelector('input[name="product1-bundle"]:checked');
+      const errorElement = document.getElementById('product1Error');
+      const btn = document.getElementById('addProduct1');
+
+      if (!selectedBundle) {
+        errorElement.style.display = 'block';
+        setTimeout(() => {
+          errorElement.style.display = 'none';
+        }, 3000);
+        return;
+      }
+
+      errorElement.style.display = 'none';
+      btn.classList.add('btn-loading');
+      btn.disabled = true;
+
+      const bundleValue = selectedBundle.parentElement.querySelector('.bundle-value').textContent;
+      const totalPrice = product1State.selectedPrice * product1State.quantity;
+
+      const result = await window.dataSdk.create({
+        order_id: `ORDER-${Date.now()}`,
+        product_name: document.getElementById('product1Name').textContent,
+        quantity: product1State.quantity,
+        bundle_value: bundleValue,
+        total_price: totalPrice,
+        customer_email: "",
+        payment_status: "pending",
+        order_date: new Date().toISOString()
+      });
+
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
+
+      if (result.isOk) {
+        showToast('🛒 Tillagd i varukorgen!');
+      } else {
+        showToast('❌ Kunde inte lägga till produkt');
+      }
+    });
+
+    // Add to Cart - Product 2
+    document.getElementById('addProduct2').addEventListener('click', async () => {
+      if (!isDataSdkReady) {
+        showToast('⏳ Väntar på system...');
+        return;
+      }
+
+      if (orderData.length >= 999) {
+        showToast('⚠️ Varukorg full! Max 999 produkter.');
+        return;
+      }
+
+      const selectedBundle = document.querySelector('input[name="product2-bundle"]:checked');
+      const errorElement = document.getElementById('product2Error');
+      const btn = document.getElementById('addProduct2');
+
+      if (!selectedBundle) {
+        errorElement.style.display = 'block';
+        setTimeout(() => {
+          errorElement.style.display = 'none';
+        }, 3000);
+        return;
+      }
+
+      errorElement.style.display = 'none';
+      btn.classList.add('btn-loading');
+      btn.disabled = true;
+
+      const bundleValue = selectedBundle.parentElement.querySelector('.bundle-value').textContent;
+      const totalPrice = product2State.selectedPrice * product2State.quantity;
+
+      const result = await window.dataSdk.create({
+        order_id: `ORDER-${Date.now()}`,
+        product_name: document.getElementById('product2Name').textContent,
+        quantity: product2State.quantity,
+        bundle_value: bundleValue,
+        total_price: totalPrice,
+        customer_email: "",
+        payment_status: "pending",
+        order_date: new Date().toISOString()
+      });
+
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
+
+      if (result.isOk) {
+        showToast('🛒 Tillagd i varukorgen!');
+      } else {
+        showToast('❌ Kunde inte lägga till produkt');
+      }
+    });
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    // Element SDK
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = 'Tahoma, Geneva, Verdana, sans-serif';
+
+      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.body.style.fontSize = `${baseSize}px`;
+      document.body.style.background = config.background_color || defaultConfig.background_color;
+      document.body.style.color = config.text_color || defaultConfig.text_color;
+
+      document.getElementById('product1Name').textContent = config.product_1_name || defaultConfig.product_1_name;
+      document.getElementById('product1Description').textContent = config.product_1_description || defaultConfig.product_1_description;
+      document.getElementById('product2Name').textContent = config.product_2_name || defaultConfig.product_2_name;
+      document.getElementById('product2Description').textContent = config.product_2_description || defaultConfig.product_2_description;
+      document.getElementById('addToCart1').textContent = `🛒 ${config.add_to_cart_text || defaultConfig.add_to_cart_text}`;
+      document.getElementById('addToCart2').textContent = `🛒 ${config.add_to_cart_text || defaultConfig.add_to_cart_text}`;
+      document.getElementById('buyNow1').textContent = `💳 ${config.buy_now_text || defaultConfig.buy_now_text}`;
+      document.getElementById('buyNow2').textContent = `💳 ${config.buy_now_text || defaultConfig.buy_now_text}`;
+      document.getElementById('backToHome').querySelector('span:last-child').textContent = config.back_to_home_text || defaultConfig.back_to_home_text;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_text_color || defaultConfig.secondary_text_color,
+              set: (value) => {
+                config.secondary_text_color = value;
+                window.elementSdk.setConfig({ secondary_text_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["product_1_name", config.product_1_name || defaultConfig.product_1_name],
+          ["product_1_description", config.product_1_description || defaultConfig.product_1_description],
+          ["product_2_name", config.product_2_name || defaultConfig.product_2_name],
+          ["product_2_description", config.product_2_description || defaultConfig.product_2_description],
+          ["add_to_cart_text", config.add_to_cart_text || defaultConfig.add_to_cart_text],
+          ["buy_now_text", config.buy_now_text || defaultConfig.buy_now_text],
+          ["back_to_home_text", config.back_to_home_text || defaultConfig.back_to_home_text]
+        ])
+      });
+    }
+
+    initDataSdk();
+    onConfigChange(defaultConfig);
+    updateProduct1Display();
+    updateProduct2Display();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a10da4486aa0a18',t:'MTc2MzU2NzMxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

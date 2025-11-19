@@ -15,16 +15,130 @@
                 <a href="products.html">Produkter</a>
                 <a href="about.html">Om Oss</a>
                 <a href="contact.html">Kontakt</a>
-                <a href="cart.html" class="cart-link">🛒 Varukorg</a>
+                <a href="cart.html" class="cart-link">🛒 Varukorg <span id="cartCount">0</span></a>
             </nav>
         </div>
     </header>
 
-    <section class="products-page">
+    <section class="products-hero">
         <div class="container">
-            <h1>Våra Produkter</h1>
-            <div class="products-grid" id="allProducts">
-                <!-- Alla produkter laddas här -->
+            <h1>Våra Premium Produkter</h1>
+            <p>Välj ditt paket, välj antal, och betala säkert via Eneba</p>
+        </div>
+    </section>
+
+    <!-- 200-lappar Produkt -->
+    <section id="200" class="product-section">
+        <div class="container">
+            <div class="product-header">
+                <div class="product-icon">💳</div>
+                <h2>200-lappar</h2>
+                <p>Perfekt för småföretag och personligt bruk</p>
+            </div>
+
+            <div class="bundle-options">
+                <h3>Välj Paket:</h3>
+                <div class="bundles-grid">
+                    <div class="bundle-option" data-price="419">
+                        <input type="radio" name="bundle-200" id="bundle-200-1">
+                        <label for="bundle-200-1">
+                            <span class="bundle-value">2,400 kr i sedlar</span>
+                            <span class="bundle-price">419 kr</span>
+                            <span class="savings">Spara 82%</span>
+                        </label>
+                    </div>
+                    <div class="bundle-option" data-price="699">
+                        <input type="radio" name="bundle-200" id="bundle-200-2">
+                        <label for="bundle-200-2">
+                            <span class="bundle-value">4,800 kr i sedlar</span>
+                            <span class="bundle-price">699 kr</span>
+                            <span class="savings">Spara 85%</span>
+                        </label>
+                    </div>
+                    <div class="bundle-option" data-price="1049">
+                        <input type="radio" name="bundle-200" id="bundle-200-3">
+                        <label for="bundle-200-3">
+                            <span class="bundle-value">9,600 kr i sedlar</span>
+                            <span class="bundle-price">1,049 kr</span>
+                            <span class="savings">Spara 89%</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quantity-section">
+                <h3>Antal Paket:</h3>
+                <div class="quantity-controls">
+                    <button class="qty-btn" onclick="decreaseQty('200')">-</button>
+                    <span class="quantity" id="qty-200">1</span>
+                    <button class="qty-btn" onclick="increaseQty('200')">+</button>
+                </div>
+                <div class="total-price">
+                    Totalt: <span id="total-200">419</span> kr
+                </div>
+            </div>
+
+            <div class="product-actions">
+                <button class="cta-button" onclick="addToCart('200')">Lägg i Varukorg</button>
+                <button class="cta-button secondary" onclick="buyNow('200')">Köp Nu via Eneba</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 500-lappar Produkt -->
+    <section id="500" class="product-section">
+        <div class="container">
+            <div class="product-header">
+                <div class="product-icon">💼</div>
+                <h2>500-lappar</h2>
+                <p>Mest populära valet för företag</p>
+            </div>
+
+            <div class="bundle-options">
+                <h3>Välj Paket:</h3>
+                <div class="bundles-grid">
+                    <div class="bundle-option" data-price="279">
+                        <input type="radio" name="bundle-500" id="bundle-500-1">
+                        <label for="bundle-500-1">
+                            <span class="bundle-value">3,000 kr i sedlar</span>
+                            <span class="bundle-price">279 kr</span>
+                            <span class="savings">Spara 91%</span>
+                        </label>
+                    </div>
+                    <div class="bundle-option" data-price="489">
+                        <input type="radio" name="bundle-500" id="bundle-500-2">
+                        <label for="bundle-500-2">
+                            <span class="bundle-value">6,000 kr i sedlar</span>
+                            <span class="bundle-price">489 kr</span>
+                            <span class="savings">Spara 92%</span>
+                        </label>
+                    </div>
+                    <div class="bundle-option" data-price="769">
+                        <input type="radio" name="bundle-500" id="bundle-500-3">
+                        <label for="bundle-500-3">
+                            <span class="bundle-value">12,000 kr i sedlar</span>
+                            <span class="bundle-price">769 kr</span>
+                            <span class="savings">Spara 94%</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quantity-section">
+                <h3>Antal Paket:</h3>
+                <div class="quantity-controls">
+                    <button class="qty-btn" onclick="decreaseQty('500')">-</button>
+                    <span class="quantity" id="qty-500">1</span>
+                    <button class="qty-btn" onclick="increaseQty('500')">+</button>
+                </div>
+                <div class="total-price">
+                    Totalt: <span id="total-500">279</span> kr
+                </div>
+            </div>
+
+            <div class="product-actions">
+                <button class="cta-button" onclick="addToCart('500')">Lägg i Varukorg</button>
+                <button class="cta-button secondary" onclick="buyNow('500')">Köp Nu via Eneba</button>
             </div>
         </div>
     </section>
@@ -36,6 +150,7 @@
     </footer>
 
     <script src="js/product-data.js"></script>
+    <script src="js/cart.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

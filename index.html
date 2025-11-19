@@ -1,1336 +1,947 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMINEX | Premium TV LED Backlights</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --primary: #6d28d9;
-            --secondary: #ec4899;
-            --dark: #0f172a;
-            --light: #f8fafc;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
-            overflow-x: hidden;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(15,23,42,0.95) 100%),
-                         url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .product-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(109, 40, 217, 0.3);
-        }
-        
-        .product-image {
-            transition: all 0.3s ease;
-        }
-        
-        .product-image:hover {
-            box-shadow: 0 0 20px rgba(109, 40, 217, 0.5);
-        }
-        
-        .color-option {
-            transition: all 0.3s ease;
-            transform: scale(0.9);
-        }
-        
-        .color-option:hover, .color-option.active {
-            transform: scale(1.1);
-            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary);
-        }
-        
-        .glow-text {
-            text-shadow: 0 0 10px rgba(109, 40, 217, 0.7);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(109, 40, 217, 0.3);
-        }
-        
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(30deg);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover::after {
-            left: 100%;
-        }
-        
-        .btn-secondary {
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(109, 40, 217, 0.2);
-            background-color: rgba(109, 40, 217, 0.2);
-        }
-        
-        .mode-selector {
-            transition: all 0.3s ease;
-        }
-        
-        .mode-selector.active {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(109, 40, 217, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 1s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Phone controlling TV animation */
-        .phone-animation {
-            position: relative;
-            width: 200px;
-            height: 400px;
-            margin: 0 auto;
-        }
-        
-        .phone {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('https://cdn.pixabay.com/photo/2017/01/22/12/07/imac-1999636_1280.png') no-repeat center center;
-            background-size: contain;
-            z-index: 2;
-        }
-        
-        .screen {
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            width: 80%;
-            height: 80%;
-            background: #111;
-            border-radius: 5px;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .app-interface {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        
-        .color-picker {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .color-circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .color-circle:hover {
-            transform: scale(1.2);
-        }
-        
-        .brightness-slider {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        
-        .effect-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .effect-btn {
-            padding: 8px 12px;
-            background: rgba(109, 40, 217, 0.3);
-            border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .effect-btn:hover {
-            background: rgba(109, 40, 217, 0.6);
-        }
-        
-        .tv-reflection {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(109, 40, 217, 0.3) 0%, rgba(236, 72, 153, 0.3) 100%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .phone-animation:hover .tv-reflection {
-            opacity: 0.3;
-        }
-        
-        /* Cart drawer */
-        .cart-drawer {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            background-color: #0f172a;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .cart-drawer.open {
-            right: 0;
-        }
-        
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        
-        .cart-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* Checkout page */
-        .checkout-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        .checkout-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        @media (min-width: 1024px) {
-            .checkout-grid {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-        
-        /* Product page */
-        .product-gallery {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 1rem;
-        }
-        
-        @media (min-width: 768px) {
-            .product-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .product-gallery {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        /* Loading spinner */
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(109, 40, 217, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Mobile menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(15, 23, 42, 0.98);
-            z-index: 1000;
-            transition: left 0.3s ease;
-            overflow-y: auto;
-        }
-        
-        .mobile-menu.open {
-            left: 0;
-        }
-        
-        /* Product badge */
-        .product-badge {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        /* Quantity selector */
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            border: 1px solid rgba(156, 163, 175, 0.3);
-            border-radius: 0.375rem;
-            overflow: hidden;
-        }
-        
-        .quantity-btn {
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(30, 41, 59, 0.5);
-            color: rgba(156, 163, 175, 1);
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .quantity-btn:hover {
-            background-color: rgba(30, 41, 59, 0.8);
-            color: white;
-        }
-        
-        .quantity-input {
-            width: 3rem;
-            height: 2.5rem;
-            text-align: center;
-            border: none;
-            background-color: rgba(30, 41, 59, 0.3);
-            color: white;
-            font-size: 1rem;
-        }
-        
-        /* Tab system */
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .tab-button {
-            padding: 0.75rem 1.5rem;
-            border-bottom: 2px solid transparent;
-            font-weight: 500;
-            color: rgba(156, 163, 175, 1);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .tab-button.active {
-            color: white;
-            border-bottom-color: var(--primary);
-        }
-        
-        /* Review stars */
-        .review-stars {
-            display: inline-flex;
-        }
-        
-        .star {
-            color: rgba(156, 163, 175, 0.3);
-        }
-        
-        .star.active {
-            color: #f59e0b;
-        }
-        
-        /* Accordion */
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        
-        .accordion-content.open {
-            max-height: 1000px;
-        }
-        
-        /* Progress bar */
-        .progress-bar {
-            height: 0.5rem;
-            background-color: rgba(30, 41, 59, 0.5);
-            border-radius: 0.25rem;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 0.25rem;
-        }
-        
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-        }
-        
-        .tooltip-text {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(30, 41, 59, 0.9);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s;
-            z-index: 10;
-            margin-bottom: 0.5rem;
-        }
-        
-        .tooltip:hover .tooltip-text {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* Toast notification */
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: rgba(30, 41, 59, 0.95);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .toast-success {
-            border-left: 4px solid #10b981;
-        }
-        
-        .toast-error {
-            border-left: 4px solid #ef4444;
-        }
-        
-        .toast-icon {
-            margin-right: 1rem;
-            font-size: 1.25rem;
-        }
-        
-        .toast-close {
-            margin-left: 1rem;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-        
-        .toast-close:hover {
-            opacity: 1;
-        }
-    </style>
-</head>
-<body class="antialiased">
-    <!-- Navigation -->
-    <nav class="bg-black/80 backdrop-blur-md py-4 px-6 fixed w-full z-50 border-b border-purple-900/50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center">
-                    <i class="fas fa-tv text-white"></i>
-                </div>
-                <a href="index.html" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">LUMINEX</a>
-            </div>
-            
-            <div class="hidden lg:flex items-center space-x-8">
-                <a href="products.html" class="text-gray-300 hover:text-white transition font-medium">Products</a>
-                <a href="#features" class="text-gray-300 hover:text-white transition font-medium">Features</a>
-                <a href="how-it-works.html" class="text-gray-300 hover:text-white transition font-medium">How It Works</a>
-                <a href="#testimonials" class="text-gray-300 hover:text-white transition font-medium">Reviews</a>
-                <div class="relative group">
-                    <button class="text-gray-300 hover:text-white transition font-medium flex items-center">
-                        More <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                    </button>
-                    <div class="absolute left-0 mt-2 w-48 bg-slate-900 rounded-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                        <a href="blog.html" class="block px-4 py-2 text-gray-300 hover:bg-purple-900/30 hover:text-white">Blog</a>
-                        <a href="support.html" class="block px-4 py-2 text-gray-300 hover:bg-purple-900/30 hover:text-white">Support</a>
-                        <a href="about.html" class="block px-4 py-2 text-gray-300 hover:bg-purple-900/30 hover:text-white">About Us</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="flex items-center space-x-4">
-                <button id="mobile-menu-button" class="lg:hidden text-gray-300 hover:text-white">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-                <button class="hidden md:flex items-center space-x-1 text-gray-300 hover:text-white">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button id="cart-button" class="flex items-center space-x-1 text-gray-300 hover:text-white relative">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="bg-purple-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                </button>
-                <a href="products.html" class="hidden md:block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full font-medium hover:opacity-90 transition">
-                    Shop Now
-                </a>
-            </div>
-        </div>
+<!doctype html>
+<html lang="sv">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyxcopy - Varukorg</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a12;
+      color: #ffffff;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Header */
+    .header {
+      background: rgba(15, 15, 25, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid #22c55e;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: #d1d5db;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #22c55e;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #0f0f19 0%, #1a1a2e 100%);
+      padding: 80px 20px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      animation: slideInUp 0.8s ease;
+    }
+
+    .hero-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 10px 30px rgba(34, 197, 94, 0.4));
+    }
+
+    .page-title {
+      font-size: 56px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      animation: shimmer 4s linear infinite;
+      background-size: 200% auto;
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 40px;
+    }
+
+    /* Cart Items */
+    .cart-section {
+      animation: slideInUp 1s ease;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 30px 0;
+      letter-spacing: 0.5px;
+    }
+
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cart-item {
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(15, 15, 25, 0.9) 100%);
+      border: 3px solid rgba(34, 197, 94, 0.3);
+      border-radius: 20px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 24px;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .cart-item:hover {
+      border-color: #22c55e;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+    }
+
+    .item-icon {
+      font-size: 60px;
+      text-align: center;
+      filter: drop-shadow(0 4px 12px rgba(34, 197, 94, 0.4));
+    }
+
+    .item-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .item-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .item-description {
+      font-size: 14px;
+      color: #9ca3af;
+      margin: 0;
+    }
+
+    .item-price {
+      font-size: 24px;
+      font-weight: 800;
+      color: #22c55e;
+      margin: 8px 0 0 0;
+    }
+
+    .item-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(15, 15, 25, 0.8);
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      border-radius: 12px;
+      padding: 8px 16px;
+    }
+
+    .quantity-btn {
+      background: none;
+      border: none;
+      color: #22c55e;
+      font-size: 24px;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 4px 12px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .quantity-btn:hover {
+      transform: scale(1.2);
+      color: #10b981;
+    }
+
+    .quantity-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .quantity-display {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .remove-btn {
+      background: rgba(239, 68, 68, 0.1);
+      border: 2px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: inherit;
+    }
+
+    .remove-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      transform: translateY(-2px);
+    }
+
+    /* Empty Cart */
+    .empty-cart {
+      text-align: center;
+      padding: 80px 20px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .empty-cart-icon {
+      font-size: 120px;
+      margin-bottom: 24px;
+      opacity: 0.5;
+    }
+
+    .empty-cart-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #9ca3af;
+      margin: 0 0 16px 0;
+    }
+
+    .empty-cart-text {
+      font-size: 18px;
+      color: #6b7280;
+      margin: 0 0 32px 0;
+    }
+
+    .shop-now-btn {
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      color: white;
+      border: none;
+      padding: 18px 48px;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+      font-family: inherit;
+    }
+
+    .shop-now-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(34, 197, 94, 0.6);
+    }
+
+    /* Summary Section */
+    .summary-section {
+      animation: slideInUp 1.2s ease;
+    }
+
+    .summary-card {
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(15, 15, 25, 0.9) 100%);
+      border: 3px solid rgba(34, 197, 94, 0.3);
+      border-radius: 24px;
+      padding: 32px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .summary-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 24px 0;
+      letter-spacing: 0.5px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid rgba(34, 197, 94, 0.1);
+    }
+
+    .summary-row:last-of-type {
+      border-bottom: none;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .summary-label {
+      font-size: 16px;
+      color: #9ca3af;
+      font-weight: 600;
+    }
+
+    .summary-value {
+      font-size: 18px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .summary-total {
+      margin-top: 24px;
+    }
+
+    .total-label {
+      font-size: 20px;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .total-value {
+      font-size: 32px;
+      color: #22c55e;
+      font-weight: 900;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      color: white;
+      border: none;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 24px;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+      font-family: inherit;
+    }
+
+    .checkout-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(34, 197, 94, 0.6);
+    }
+
+    .checkout-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Checkout Form */
+    .checkout-form {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 3px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #9ca3af;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 16px;
+      background: rgba(15, 15, 25, 0.8);
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #22c55e;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 16px;
+      background: rgba(15, 15, 25, 0.8);
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: #22c55e;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(15, 15, 25, 0.95) 100%);
+      border: 3px solid #22c55e;
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      animation: scaleIn 0.3s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-icon {
+      font-size: 100px;
+      margin-bottom: 24px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .modal-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: #22c55e;
+      margin: 0 0 16px 0;
+    }
+
+    .modal-text {
+      font-size: 18px;
+      color: #d1d5db;
+      margin: 0 0 32px 0;
+      line-height: 1.6;
+    }
+
+    .modal-btn {
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      color: white;
+      border: none;
+      padding: 16px 48px;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-family: inherit;
+    }
+
+    .modal-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .main-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .summary-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 42px;
+      }
+
+      .hero-icon {
+        font-size: 60px;
+      }
+
+      .cart-item {
+        grid-template-columns: 60px 1fr;
+        gap: 16px;
+      }
+
+      .item-controls {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .item-icon {
+        font-size: 40px;
+      }
+
+      .item-name {
+        font-size: 18px;
+      }
+
+      .item-price {
+        font-size: 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Header -->
+  <header class="header">
+   <div class="header-container">
+    <div class="logo">
+     Lyxcopy
+    </div>
+    <nav class="nav-links"><a href="#home" class="nav-link">Hem</a> <a href="#products" class="nav-link">Produkter</a> <a href="#about" class="nav-link">Om Oss</a> <a href="#contact" class="nav-link">Kontakt</a>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
-        <div class="flex justify-end p-6">
-            <button id="close-mobile-menu" class="text-white text-2xl">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="flex flex-col items-center justify-center h-full space-y-8 px-6">
-            <a href="products.html" class="text-white text-2xl font-medium">Products</a>
-            <a href="#features" class="text-white text-2xl font-medium">Features</a>
-            <a href="how-it-works.html" class="text-white text-2xl font-medium">How It Works</a>
-            <a href="#testimonials" class="text-white text-2xl font-medium">Reviews</a>
-            <a href="blog.html" class="text-white text-2xl font-medium">Blog</a>
-            <a href="support.html" class="text-white text-2xl font-medium">Support</a>
-            <a href="about.html" class="text-white text-2xl font-medium">About Us</a>
-            <div class="flex items-center space-x-4 mt-8">
-                <button class="flex items-center space-x-1 text-white">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="bg-purple-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                </button>
-                <a href="products.html" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-medium hover:opacity-90 transition">
-                    Shop Now
-                </a>
-            </div>
-        </div>
+   </div>
+  </header><!-- Hero -->
+  <section class="hero">
+   <div class="hero-content">
+    <div class="hero-icon">
+     🛒
     </div>
-
-    <!-- Cart Drawer -->
-    <div id="cart-overlay" class="cart-overlay"></div>
-    
-    <div id="cart-drawer" class="cart-drawer">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-white">Your Cart (3)</h2>
-                <button id="close-cart" class="text-gray-400 hover:text-white">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            
-            <div id="cart-items" class="space-y-4 mb-6">
-                <!-- Cart Item 1 -->
-                <div class="flex items-center justify-between p-4 bg-slate-800 rounded-lg">
-                    <div class="flex items-center space-x-4">
-                        <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             class="w-16 h-16 object-cover rounded-lg">
-                        <div>
-                            <h3 class="font-medium text-white">Basic LED TV Backlight</h3>
-                            <p class="text-sm text-gray-400">Color: Red</p>
-                            <div class="flex items-center mt-1">
-                                <div class="quantity-selector">
-                                    <button class="quantity-btn">-</button>
-                                    <input type="text" value="1" class="quantity-input">
-                                    <button class="quantity-btn">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="font-medium text-white">$39.99</p>
-                        <button class="text-sm text-gray-400 hover:text-red-400 mt-2">Remove</button>
-                    </div>
-                </div>
-                
-                <!-- Cart Item 2 -->
-                <div class="flex items-center justify-between p-4 bg-slate-800 rounded-lg">
-                    <div class="flex items-center space-x-4">
-                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             class="w-16 h-16 object-cover rounded-lg">
-                        <div>
-                            <h3 class="font-medium text-white">RGBIC TV Backlight Pro</h3>
-                            <p class="text-sm text-gray-400">Color: Multicolor</p>
-                            <div class="flex items-center mt-1">
-                                <div class="quantity-selector">
-                                    <button class="quantity-btn">-</button>
-                                    <input type="text" value="1" class="quantity-input">
-                                    <button class="quantity-btn">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="font-medium text-white">$69.99</p>
-                        <button class="text-sm text-gray-400 hover:text-red-400 mt-2">Remove</button>
-                    </div>
-                </div>
-                
-                <!-- Cart Item 3 -->
-                <div class="flex items-center justify-between p-4 bg-slate-800 rounded-lg">
-                    <div class="flex items-center space-x-4">
-                        <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             class="w-16 h-16 object-cover rounded-lg">
-                        <div>
-                            <h3 class="font-medium text-white">Camera Sync Backlight</h3>
-                            <p class="text-sm text-gray-400">Mode: Camera</p>
-                            <div class="flex items-center mt-1">
-                                <div class="quantity-selector">
-                                    <button class="quantity-btn">-</button>
-                                    <input type="text" value="1" class="quantity-input">
-                                    <button class="quantity-btn">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="font-medium text-white">$99.99</p>
-                        <button class="text-sm text-gray-400 hover:text-red-400 mt-2">Remove</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-slate-700 pt-4 mb-6">
-                <div class="flex justify-between mb-2">
-                    <span class="text-gray-400">Subtotal</span>
-                    <span class="font-medium text-white">$209.97</span>
-                </div>
-                <div class="flex justify-between mb-2">
-                    <span class="text-gray-400">Shipping</span>
-                    <span class="font-medium text-white">Free</span>
-                </div>
-                <div class="flex justify-between mb-4">
-                    <span class="text-gray-400">Tax</span>
-                    <span class="font-medium text-white">$16.80</span>
-                </div>
-                <div class="flex justify-between text-lg font-bold text-white pt-4 border-t border-slate-700">
-                    <span>Total</span>
-                    <span>$226.77</span>
-                </div>
-            </div>
-            
-            <div class="space-y-4">
-                <a href="checkout.html" class="block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-6 rounded-full text-center hover:opacity-90 transition">
-                    Proceed to Checkout
-                </a>
-                <a href="products.html" class="block border border-purple-500 text-purple-400 font-medium py-3 px-6 rounded-full text-center hover:bg-purple-900/30 transition">
-                    Continue Shopping
-                </a>
-            </div>
-        </div>
+    <h1 class="page-title" id="pageTitle">Din Varukorg</h1>
+   </div>
+  </section><!-- Main Content -->
+  <main class="main-container"><!-- Cart Items Section -->
+   <section class="cart-section">
+    <h2 class="section-title">Dina Produkter</h2>
+    <div id="cartItems" class="cart-items"><!-- Cart items will be rendered here -->
     </div>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast toast-success">
-        <div class="toast-icon">
-            <i class="fas fa-check-circle"></i>
-        </div>
-        <div class="toast-message">
-            Product added to cart successfully!
-        </div>
-        <div class="toast-close">
-            <i class="fas fa-times"></i>
-        </div>
+   </section><!-- Summary Section -->
+   <aside class="summary-section">
+    <div class="summary-card">
+     <h2 class="summary-title">Ordersammanfattning</h2>
+     <div class="summary-row"><span class="summary-label">Produkter:</span> <span class="summary-value" id="itemCount">0</span>
+     </div>
+     <div class="summary-row"><span class="summary-label">Delsumma:</span> <span class="summary-value" id="subtotal">€0.00</span>
+     </div>
+     <div class="summary-row summary-total"><span class="total-label">Totalt:</span> <span class="total-value" id="total">€0.00</span>
+     </div><button class="checkout-btn" id="checkoutBtn" disabled> <span id="checkoutBtnText">Slutför Köp</span> </button> <!-- Checkout Form -->
+     <form class="checkout-form" id="checkoutForm">
+      <div class="form-group"><label for="email" class="form-label">Email Address</label> <input type="email" id="email" class="form-input" placeholder="din@email.se" required>
+      </div>
+      <div class="form-group"><label for="payment" class="form-label">Betalningsmetod</label> <select id="payment" class="form-select" required> <option value="">Välj betalningsmetod</option> <option value="eneba">Eneba Crypto Voucher</option> <option value="card">Kreditkort (Kommer snart)</option> <option value="swish">Swish (Kommer snart)</option> </select>
+      </div>
+     </form>
     </div>
+   </aside>
+  </main><!-- Success Modal -->
+  <div class="modal" id="successModal">
+   <div class="modal-content">
+    <div class="modal-icon">
+     🎉
+    </div>
+    <h2 class="modal-title">Order Bekräftad!</h2>
+    <p class="modal-text">Tack för ditt köp! Din Crypto Voucher kommer att skickas till din email inom 5-15 minuter.</p><button class="modal-btn" onclick="closeModal()">Stäng</button>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      page_title: "Din Varukorg",
+      empty_cart_message: "Din varukorg är tom",
+      checkout_button: "Slutför Köp",
+      background_color: "#0a0a12",
+      surface_color: "#1a1a2e",
+      text_color: "#ffffff",
+      accent_color: "#22c55e",
+      secondary_text_color: "#9ca3af",
+      font_family: "Segoe UI",
+      font_size: 16
+    };
 
-    <!-- Hero Section -->
-    <section class="hero-gradient min-h-screen flex items-center justify-center pt-16">
-        <div class="max-w-7xl mx-auto px-6 py-24 md:py-32">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white glow-text">
-                        Transform Your <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">TV Experience</span>
-                    </h1>
-                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-lg">
-                        Immersive ambient lighting that syncs with your screen for the ultimate home theater experience.
-                    </p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <button class="btn-primary text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg relative overflow-hidden">
-                            Shop Collection
-                        </button>
-                        <button class="border-2 border-purple-500 text-purple-400 hover:bg-purple-900/30 font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105">
-                            <i class="fas fa-play mr-2"></i> Watch Demo
-                        </button>
-                    </div>
-                    <div class="mt-8 flex items-center space-x-4">
-                        <div class="flex -space-x-2">
-                            <img src="https://randomuser.me/api/portraits/women/12.jpg" class="w-10 h-10 rounded-full border-2 border-purple-500">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full border-2 border-purple-500">
-                            <img src="https://randomuser.me/api/portraits/women/45.jpg" class="w-10 h-10 rounded-full border-2 border-purple-500">
-                        </div>
-                        <div class="text-gray-300">
-                            <p class="font-medium">Trusted by 10,000+ customers</p>
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="text-gray-400 ml-1">(4.8)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="md:w-1/2 relative fade-in">
-                    <div class="floating">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F71uw9xBp7TL._AC_SL1500_.jpg&f=1&nofb=1&ipt=568e299736993125fa4028495843ab5905e6bc06af7add0fdfd8a39dabbec163" 
-                             alt="Premium TV LED Backlight" 
-                             class="w-full max-w-md mx-auto rounded-xl shadow-2xl border border-purple-500/30">
-                    </div>
-                    <div class="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-purple-600/20 blur-3xl -z-10"></div>
-                    <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-pink-600/20 blur-3xl -z-10"></div>
-                </div>
+    // Product catalog
+    const products = [
+      {
+        id: 1,
+        name: "Crypto Voucher €50",
+        description: "Perfekt för nybörjare",
+        price: 50,
+        icon: "💎"
+      },
+      {
+        id: 2,
+        name: "Crypto Voucher €100",
+        description: "Populäraste valet",
+        price: 100,
+        icon: "💰"
+      },
+      {
+        id: 3,
+        name: "Crypto Voucher €200",
+        description: "Bäst värde för pengarna",
+        price: 200,
+        icon: "🏆"
+      }
+    ];
+
+    // Cart state
+    let cart = [
+      { ...products[0], quantity: 1 },
+      { ...products[1], quantity: 2 }
+    ];
+
+    function renderCart() {
+      const cartItemsContainer = document.getElementById('cartItems');
+      
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `
+          <div class="empty-cart">
+            <div class="empty-cart-icon">🛒</div>
+            <h3 class="empty-cart-title" id="emptyCartMsg">${defaultConfig.empty_cart_message}</h3>
+            <p class="empty-cart-text">Lägg till produkter för att fortsätta</p>
+            <a href="#products" class="shop-now-btn">Handla Nu</a>
+          </div>
+        `;
+        updateSummary();
+        return;
+      }
+
+      cartItemsContainer.innerHTML = cart.map(item => `
+        <div class="cart-item" data-id="${item.id}">
+          <div class="item-icon">${item.icon}</div>
+          <div class="item-details">
+            <h3 class="item-name">${item.name}</h3>
+            <p class="item-description">${item.description}</p>
+            <p class="item-price">€${item.price.toFixed(2)}</p>
+          </div>
+          <div class="item-controls">
+            <div class="quantity-control">
+              <button class="quantity-btn" onclick="decreaseQuantity(${item.id})" ${item.quantity <= 1 ? 'disabled' : ''}>−</button>
+              <span class="quantity-display">${item.quantity}</span>
+              <button class="quantity-btn" onclick="increaseQuantity(${item.id})">+</button>
             </div>
+            <button class="remove-btn" onclick="removeItem(${item.id})">Ta Bort</button>
+          </div>
         </div>
-    </section>
+      `).join('');
 
-    <!-- Brands Section -->
-    <section class="py-12 bg-gradient-to-b from-purple-900/20 to-transparent">
-        <div class="max-w-7xl mx-auto px-6">
-            <p class="text-center text-gray-400 mb-8">TRUSTED BY THE BEST</p>
-            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-80 hover:opacity-100 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Samsung_logo_2015.svg/2560px-Samsung_logo_2015.svg.png" class="h-8 grayscale hover:grayscale-0 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/LG_logo_%282015%29.svg/2560px-LG_logo_%282015%29.svg.png" class="h-8 grayscale hover:grayscale-0 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Sony_logo_black.svg/1280px-Sony_logo_black.svg.png" class="h-8 grayscale hover:grayscale-0 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Philips_logo.svg/1280px-Philips_logo.svg.png" class="h-8 grayscale hover:grayscale-0 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/TCL_logo.svg/1280px-TCL_logo.svg.png" class="h-8 grayscale hover:grayscale-0 transition">
-            </div>
-        </div>
-    </section>
+      updateSummary();
+    }
 
-    <!-- Products Section -->
-    <section id="products" class="py-20 bg-gradient-to-b from-slate-900 to-gray-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="inline-block mb-4 px-4 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm font-medium">OUR COLLECTION</span>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Premium <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">TV Backlights</span></h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
-                    Choose from our selection of high-quality ambient lighting solutions for any TV size
-                </p>
-            </div>
+    function updateSummary() {
+      const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      document.getElementById('itemCount').textContent = itemCount;
+      document.getElementById('subtotal').textContent = `€${subtotal.toFixed(2)}`;
+      document.getElementById('total').textContent = `€${subtotal.toFixed(2)}`;
+      
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      checkoutBtn.disabled = cart.length === 0;
+    }
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1 -->
-                <div class="product-card bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-purple-500/50">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Basic LED TV Backlight" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                        <span class="product-badge bg-purple-600 text-white">Bestseller</span>
-                        <button class="absolute top-4 right-4 bg-black/70 hover:bg-black text-white p-2 rounded-full transition">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-white">Basic LED TV Backlight</h3>
-                            <span class="text-lg font-bold text-purple-400">$39.99</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-4">Single color ambient lighting for TVs up to 65"</p>
-                        
-                        <div class="mb-4">
-                            <div class="flex justify-between text-sm text-gray-400 mb-1">
-                                <span>Color:</span>
-                                <span class="text-purple-400">6 options</span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <div class="color-option w-6 h-6 rounded-full bg-red-500 cursor-pointer active"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-blue-500 cursor-pointer"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-green-500 cursor-pointer"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-purple-500 cursor-pointer"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-white border border-gray-300 cursor-pointer"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-yellow-500 cursor-pointer"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center">
-                                <div class="flex text-yellow-400 text-sm mr-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-gray-400 text-sm">(428)</span>
-                            </div>
-                            <button class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-full transition flex items-center add-to-cart">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    function increaseQuantity(id) {
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.quantity++;
+        renderCart();
+      }
+    }
 
-                <!-- Product 2 -->
-                <div class="product-card bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-purple-500/50">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="RGBIC TV Backlight" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                        <span class="product-badge bg-pink-600 text-white">Popular</span>
-                        <button class="absolute top-4 right-4 bg-black/70 hover:bg-black text-white p-2 rounded-full transition">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-white">RGBIC TV Backlight Pro</h3>
-                            <span class="text-lg font-bold text-purple-400">$69.99</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-4">Multi-color ambient lighting with smart control</p>
-                        
-                        <div class="mb-4">
-                            <div class="flex justify-between text-sm text-gray-400 mb-1">
-                                <span>Color:</span>
-                                <span class="text-purple-400">16M colors</span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <div class="color-option w-6 h-6 rounded-full bg-gradient-to-r from-red-500 to-purple-500 cursor-pointer active"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 cursor-pointer"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 cursor-pointer"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-red-500 cursor-pointer"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 cursor-pointer"></div>
-                                <div class="color-option w-6 h-6 rounded-full bg-gradient-to-r from-amber-500 to-red-500 cursor-pointer"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center">
-                                <div class="flex text-yellow-400 text-sm mr-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <span class="text-gray-400 text-sm">(892)</span>
-                            </div>
-                            <button class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-full transition flex items-center add-to-cart">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    function decreaseQuantity(id) {
+      const item = cart.find(item => item.id === id);
+      if (item && item.quantity > 1) {
+        item.quantity--;
+        renderCart();
+      }
+    }
 
-                <!-- Product 3 -->
-                <div class="product-card bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-purple-500/50">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Camera Sync Backlight" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                        <span class="product-badge bg-amber-600 text-white">New</span>
-                        <button class="absolute top-4 right-4 bg-black/70 hover:bg-black text-white p-2 rounded-full transition">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-white">Camera Sync Backlight</h3>
-                            <span class="text-lg font-bold text-purple-400">$99.99</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-4">Real-time screen matching colors for immersion</p>
-                        
-                        <div class="mb-4">
-                            <div class="flex justify-between text-sm text-gray-400 mb-1">
-                                <span>Sync Mode:</span>
-                                <span class="text-purple-400">4 options</span>
-                            </div>
-                            <div class="flex flex-wrap gap-2">
-                                <div class="mode-selector px-3 py-1 rounded-full text-xs border border-purple-500/30 cursor-pointer active">Camera</div>
-                                <div class="mode-selector px-3 py-1 rounded-full text-xs border border-purple-500/30 cursor-pointer">Music</div>
-                                <div class="mode-selector px-3 py-1 rounded-full text-xs border border-purple-500/30 cursor-pointer">Gaming</div>
-                                <div class="mode-selector px-3 py-1 rounded-full text-xs border border-purple-500/30 cursor-pointer">Movie</div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center">
-                                <div class="flex text-yellow-400 text-sm mr-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <span class="text-gray-400 text-sm">(156)</span>
-                            </div>
-                            <button class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-full transition flex items-center add-to-cart">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    function removeItem(id) {
+      cart = cart.filter(item => item.id !== id);
+      renderCart();
+    }
 
-            <div class="text-center mt-16">
-                <a href="products.html" class="border-2 border-purple-500 text-purple-400 hover:bg-purple-900/30 font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 flex items-center mx-auto">
-                    View All Products <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+    function closeModal() {
+      document.getElementById('successModal').classList.remove('show');
+      cart = [];
+      renderCart();
+      document.getElementById('checkoutForm').reset();
+    }
 
-    <!-- Features Section -->
-    <section id="features" class="py-20 bg-gradient-to-b from-gray-900 to-slate-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="inline-block mb-4 px-4 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm font-medium">WHY CHOOSE US</span>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Elevate Your <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">Viewing Experience</span></h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
-                    Our TV backlights are designed to enhance your entertainment in every way
-                </p>
-            </div>
+    // Checkout form submission
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      const form = document.getElementById('checkoutForm');
+      const email = document.getElementById('email').value;
+      const payment = document.getElementById('payment').value;
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-purple-500/50 transition">
-                    <div class="w-14 h-14 rounded-full bg-purple-600/20 flex items-center justify-center text-purple-400 mb-6">
-                        <i class="fas fa-tv text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Perfect Fit</h3>
-                    <p class="text-gray-400">Customizable lengths to fit any TV size from 32" to 85" with easy installation</p>
-                </div>
+      if (!email || !payment) {
+        const emailInput = document.getElementById('email');
+        const paymentSelect = document.getElementById('payment');
+        
+        if (!email) {
+          emailInput.style.borderColor = '#ef4444';
+          setTimeout(() => {
+            emailInput.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+          }, 2000);
+        }
+        
+        if (!payment) {
+          paymentSelect.style.borderColor = '#ef4444';
+          setTimeout(() => {
+            paymentSelect.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+          }, 2000);
+        }
+        return;
+      }
 
-                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-purple-500/50 transition">
-                    <div class="w-14 h-14 rounded-full bg-pink-600/20 flex items-center justify-center text-pink-400 mb-6">
-                        <i class="fas fa-palette text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">16M Colors</h3>
-                    <p class="text-gray-400">Choose from millions of colors and dynamic effects to match your mood</p>
-                </div>
+      if (cart.length === 0) return;
 
-                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-purple-500/50 transition">
-                    <div class="w-14 h-14 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-400 mb-6">
-                        <i class="fas fa-mobile-alt text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Smart Control</h3>
-                    <p class="text-gray-400">Control with our app, voice commands, or remote for ultimate convenience</p>
-                </div>
+      document.getElementById('successModal').classList.add('show');
+    });
 
-                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-purple-500/50 transition">
-                    <div class="w-14 h-14 rounded-full bg-amber-600/20 flex items-center justify-center text-amber-400 mb-6">
-                        <i class="fas fa-bolt text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Energy Saving</h3>
-                    <p class="text-gray-400">Low power consumption LEDs that last up to 50,000 hours of use</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = 'Tahoma, Geneva, Verdana, sans-serif';
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="py-20 bg-gradient-to-b from-slate-900 to-gray-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="inline-block mb-4 px-4 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm font-medium">EASY SETUP</span>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">How It <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">Works</span></h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
-                    Get your immersive lighting experience in just a few simple steps
-                </p>
-            </div>
+      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.body.style.fontSize = `${baseSize}px`;
+      document.body.style.background = config.background_color || defaultConfig.background_color;
+      document.body.style.color = config.text_color || defaultConfig.text_color;
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="relative">
-                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 h-full">
-                        <div class="w-16 h-16 rounded-full bg-purple-600 flex items-center justify-center text-white text-2xl font-bold mb-6">1</div>
-                        <h3 class="text-xl font-bold text-white mb-3">Choose Your Kit</h3>
-                        <p class="text-gray-400 mb-6">Select the perfect LED backlight kit for your TV size and desired features</p>
-                        <img src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Choose kit" 
-                             class="rounded-lg w-full">
-                    </div>
-                    <div class="absolute -bottom-4 -right-4 w-32 h-32 rounded-full bg-purple-600/20 blur-3xl -z-10"></div>
-                </div>
+      document.getElementById('pageTitle').textContent = config.page_title || defaultConfig.page_title;
+      document.getElementById('checkoutBtnText').textContent = config.checkout_button || defaultConfig.checkout_button;
+      
+      const emptyMsg = document.getElementById('emptyCartMsg');
+      if (emptyMsg) {
+        emptyMsg.textContent = config.empty_cart_message || defaultConfig.empty_cart_message;
+      }
+    }
 
-                <div class="relative">
-                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 h-full">
-                        <div class="w-16 h-16 rounded-full bg-pink-600 flex items-center justify-center text-white text-2xl font-bold mb-6">2</div>
-                        <h3 class="text-xl font-bold text-white mb-3">Install in Minutes</h3>
-                        <p class="text-gray-400 mb-6">Peel and stick the LED strips to your TV with our included mounting accessories</p>
-                        <img src="https://images.unsplash.com/photo-1600628421060-939639517883?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Installation" 
-                             class="rounded-lg w-full">
-                    </div>
-                    <div class="absolute -top-4 -left-4 w-32 h-32 rounded-full bg-pink-600/20 blur-3xl -z-10"></div>
-                </div>
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_text_color || defaultConfig.secondary_text_color,
+              set: (value) => {
+                config.secondary_text_color = value;
+                window.elementSdk.setConfig({ secondary_text_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["page_title", config.page_title || defaultConfig.page_title],
+          ["empty_cart_message", config.empty_cart_message || defaultConfig.empty_cart_message],
+          ["checkout_button", config.checkout_button || defaultConfig.checkout_button]
+        ])
+      });
+    }
 
-                <div class="relative">
-                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 h-full">
-                        <div class="w-16 h-16 rounded-full bg-amber-600 flex items-center justify-center text-white text-2xl font-bold mb-6">3</div>
-                        <h3 class="text-xl font-bold text-white mb-3">Enjoy the Magic</h3>
-                        <p class="text-gray-400 mb-6">Connect to power and transform your viewing experience with ambient lighting</p>
-                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" 
-                             alt="Enjoy" 
-                             class="rounded-lg w-full">
-                    </div>
-                    <div class="absolute -bottom-4 -right-4 w-32 h-32 rounded-full bg-amber-600/20 blur-3xl -z-10"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Demo Video -->
-    <section class="py-20 bg-gradient-to-b from-gray-900 to-slate-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700">
-                <div class="aspect-w-16 aspect-h-9 relative">
-                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" 
-                         alt="Video demo placeholder" 
-                         class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <button class="w-20 h-20 rounded-full bg-purple-600 hover:bg-purple-700 flex items-center justify-center text-white text-2xl pulse">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="p-8 md:p-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">See It In Action</h2>
-                    <p class="text-lg text-gray-300 mb-6 max-w-3xl">
-                        Watch how our TV backlights transform an ordinary viewing experience into something truly cinematic. 
-                        See the colors react in real-time to what's on screen.
-                    </p>
-                    <button class="btn-primary text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105">
-                        Watch Full Demo
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-20 bg-gradient-to-b from-slate-900 to-gray-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="inline-block mb-4 px-4 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm font-medium">HAPPY CUSTOMERS</span>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">What Our <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">Customers Say</span></h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
-                    Don't just take our word for it - hear from thousands of satisfied customers
-                </p>
-            </div>
-
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Testimonial 1 -->
-                    <div class="swiper-slide">
-                        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 h-full">
-                            <div class="flex items-center mb-6">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="w-14 h-14 rounded-full mr-4">
-                                <div>
-                                    <h4 class="font-bold text-white">Sarah K.</h4>
-                                    <div class="flex text-yellow-400 text-sm">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-300 mb-6">
-                                "The RGBIC Pro completely transformed my home theater. The colors are so vibrant and the app control makes it so easy to change settings. My movie nights will never be the same!"
-                            </p>
-                            <div class="text-sm text-gray-400">
-                                <i class="fas fa-check-circle text-purple-400 mr-1"></i> Verified Purchase · 2 weeks ago
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="swiper-slide">
-                        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 h-full">
-                            <div class="flex items-center mb-6">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="w-14 h-14 rounded-full mr-4">
-                                <div>
-                                    <h4 class="font-bold text-white">Michael T.</h4>
-                                    <div class="flex text-yellow-400 text-sm">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-300 mb-6">
-                                "I was skeptical at first but the camera sync feature blew me away. It actually matches what's on screen in real-time! Gaming with this is next level immersion."
-                            </p>
-                            <div class="text-sm text-gray-400">
-                                <i class="fas fa-check-circle text-purple-400 mr-1"></i> Verified Purchase · 1 month ago
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="swiper-slide">
-                        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 h-full">
-                            <div class="flex items-center mb-6">
-                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Customer" class="w-14 h-14 rounded-full mr-4">
-                                <div>
-                                    <h4 class="font-bold text-white">Jessica L.</h4>
-                                    <div class="flex text-yellow-400 text-sm">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-300 mb-6">
-                                "Installation took less than 10 minutes and the quality is amazing. Customer service helped me pick the perfect length for my 75" TV. Will definitely buy again as gifts!"
-                            </p>
-                            <div class="text-sm text-gray-400">
-                                <i class="fas fa-check-circle text-purple-400 mr-1"></i> Verified Purchase · 3 months ago
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 4 -->
-                    <div class="swiper-slide">
-                        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 h-full">
-                            <div class="flex items-center mb-6">
-                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Customer" class="w-14 h-14 rounded-full mr-4">
-                                <div>
-                                    <h4 class="font-bold text-white">David R.</h4>
-                                    <div class="flex text-yellow-400 text-sm">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-300 mb-6">
-                                "The music sync mode is perfect for parties. My whole living room pulses with the beat. Friends keep asking where I got these lights from!"
-                            </p>
-                            <div class="text-sm text-gray-400">
-                                <i class="fas fa-check-circle text-purple-400 mr-1"></i> Verified Purchase · 2 weeks ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-purple-900 to-pink-900">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Ready to Transform <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-pink-200">Your TV?</span></h2>
-            <p class="text-xl text-purple-100 mb-8 max-w-3xl mx-auto">
-                Join thousands of customers enjoying the ultimate ambient lighting experience. 30-day money back guarantee.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="btn-primary text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg">
-                    Shop Now
-                </button>
-                <button class="bg-black/30 hover:bg-black/50 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 border border-purple-300/30">
-                    <i class="fas fa-question-circle mr-2"></i> Need Help?
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="py-20 bg-gradient-to-b from-gray-900 to-slate-900">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="inline-block mb-4 px-4 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm font-medium">HAVE QUESTIONS?</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Frequently Asked <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">Questions</span></h2>
-            </div>
-
-            <div class="space-y-4">
-                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium text-white">What TV sizes do your backlights support?</h3>
-                        <i class="fas fa-chevron-down text-purple-400 transition-transform"></i>
-                    </button>
-                    <div class="faq-content px-6 pb-6 hidden">
-                        <p class="text-gray-300">
-                            Our LED backlight kits are available for TVs ranging from 32 inches up to 85 inches. The strips can be cut to custom lengths (at marked points) for perfect fit. We provide detailed sizing guides with each product to help you choose the right kit.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium text-white">How difficult is the installation process?</h3>
-                        <i class="fas fa-chevron-down text-purple-400 transition-transform"></i>
-                    </button>
-                    <div class="faq-content px-6 pb-6 hidden">
-                        <p class="text-gray-300">
-                            Installation is very simple and takes about 10-15 minutes. Our kits include everything you need: adhesive-backed LED strips, power supply, controller, and detailed instructions. No tools required - just peel and stick! We also provide video tutorials for each product.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium text-white">Can I control the lights with my phone?</h3>
-                        <i class="fas fa-chevron-down text-purple-400 transition-transform"></i>
-                    </button>
-                    <div class="faq-content px-6 pb-6 hidden">
-                        <p class="text-gray-300">
-                            Yes! All our premium kits include Bluetooth/WiFi connectivity and work with our free mobile app (available for iOS and Android). You can control colors, brightness, effects, and create custom scenes right from your phone. Some models also support voice control via Alexa and Google Assistant.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium text-white">What's your return policy?</h3>
-                        <i class="fas fa-chevron-down text-purple-400 transition-transform"></i>
-                    </button>
-                    <div class="faq-content px-6 pb-6 hidden">
-                        <p class="text-gray-300">
-                            We offer a 30-day money-back guarantee on all products. If you're not completely satisfied with your purchase, simply contact our customer service for a return authorization. We also provide a 2-year warranty against manufacturing defects - we'll replace your product at no cost if any issues arise.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter -->
-    <section class="py-16 bg-gradient-to-r from-purple-900 to-pink-900">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="bg-slate-900/30 backdrop-blur-md rounded-2xl p-8 md:p-12 border border-purple-500/20">
-                <h2 class="text-3xl font-bold text-white mb-4">Join Our Lighting Community</h2>
-                <p class="text-xl text-purple-100 mb-8">Subscribe for exclusive offers, setup tips, and the latest in ambient lighting tech</p>
-
-                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                    <input type="email" placeholder="Your email address" class="flex-grow px-6 py-3 rounded-full bg-slate-800/50 border border-purple-500/30 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
-                    <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition whitespace-nowrap">
-                        Subscribe Now
-                    </button>
-                </div>
-
-                <p class="text-purple-200 text-sm mt-4">We respect your privacy. Unsubscribe at any time.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Optional Footer (custom element) -->
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="components/navbar.js"></script>
-    <script src="components/footer.js"></script>
-    <script src="components/cart-icon.js"></script>
-    <script src="assets/js/script.js"></script>
-
-</body>
+    onConfigChange(defaultConfig);
+    renderCart();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a112158b33296b1',t:'MTc2MzU3MDIyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
